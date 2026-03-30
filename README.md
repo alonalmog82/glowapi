@@ -244,7 +244,7 @@ pytest tests/ -v
 
 ## Contributing
 
-Pull requests welcome. Please open an issue first for significant changes.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for local setup (venv, dependencies, running tests) and PR guidelines.
 
 ---
 
