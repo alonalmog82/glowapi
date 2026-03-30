@@ -124,7 +124,10 @@ async def update(request: GitOpsUpdateRequest):
             sidecar_raw = provider.read_file(request.repo_name, sidecar_path, ref=request.base_branch)
         except Exception as e:
             if getattr(e, "status", None) == 404:
-                raise HTTPException(status_code=404, detail=f"Sidecar not found at {sidecar_path} on {request.base_branch}")
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"Sidecar not found at {sidecar_path} on {request.base_branch}",
+                )
             raise
 
         original = json.loads(sidecar_raw)
@@ -145,7 +148,10 @@ async def update(request: GitOpsUpdateRequest):
         provider.commit_files(
             request.repo_name,
             request.branch_name,
-            [FileCommit(request.target_file, rendered), FileCommit(sidecar_path, json.dumps(updated_sidecar, indent=2))],
+            [
+                FileCommit(request.target_file, rendered),
+                FileCommit(sidecar_path, json.dumps(updated_sidecar, indent=2)),
+            ],
             commit_msg,
         )
 
